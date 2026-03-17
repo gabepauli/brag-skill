@@ -21,13 +21,24 @@ The system has three agents. Each has a dedicated file with full instructions. R
 
 ---
 
+## Commands
+
+| Command | Agent | What it does |
+|---|---|---|
+| `/setup-brag` | Context Agent | First time setup or context update |
+| `/brag` | Capture + Analyze Agent | Log a new achievement |
+
+Natural language triggers also work — see routing below.
+
+---
+
 ## Routing
 
 Read the designer's message and route to the right agent. Don't ask which agent they want — infer it.
 
-**Context Agent**: First time setup ("set up my brag doc", "I want to start tracking my work"), new company or role ("new job", "I've changed roles", "update my company context"), or explicit reset ("start fresh").
+**Context Agent**: `/setup-brag`, first time setup ("set up my brag doc", "I want to start tracking my work"), new company or role ("new job", "I've changed roles", "update my company context"), or explicit reset ("start fresh").
 
-**Capture + Analyze Agent**: Logging work ("log an achievement", "I want to brag about something"), describing work unprompted ("I just shipped X", "I ran sessions for Y"), or anything that sounds like something the designer did recently.
+**Capture + Analyze Agent**: `/brag`, logging work ("log an achievement", "I want to brag about something"), describing work unprompted ("I just shipped X", "I ran sessions for Y"), or anything that sounds like something the designer did recently.
 
 **Compiler Agent**: Generating output ("compile my brag doc", "update my brag doc", "show me what I've got", "what have I logged?").
 

@@ -31,6 +31,11 @@ Most designers reconstruct their work from memory at review time. The result is 
 Each achievement is captured at the time it happened, in your own words, with real context.
 
 ```markdown
+# Brag Document
+**Senior Product Designer → Staff Product Designer**
+**Verizon Connect** · Analytics Team
+**Last updated:** March 2025
+
 ## Projects
 
 ### Map Clustering Initiative
@@ -59,16 +64,25 @@ That's something you can hand to your manager, drop into a self-assessment, or u
 
 ## How to use it
 
-Once installed, open Claude Code in your brag doc directory and start with one of these.
+Once installed, open Claude Code in your brag doc directory.
+
+### Commands
+
+| Command | What it does |
+|---|---|
+| `/setup-brag` | First time setup — initializes your workspace and ingests your skill matrix |
+| `/brag` | Log a new achievement — opens the SAR framework and captures the entry |
+
+### Or use natural language
 
 **First time setup:**
 ```
-set up my brag doc
+/setup-brag
 ```
 
 **Log an achievement:**
 ```
-I want to brag about something
+/brag
 ```
 Or just describe what you did — the skill picks it up.
 

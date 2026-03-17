@@ -1,6 +1,6 @@
 ---
 name: brag-writer
-description: A brag document system for senior product designers. Helps designers capture, classify, and compile their achievements into a living document — ready for performance reviews, promotions, and career conversations. Use this skill when the designer wants to log an achievement, set up their brag doc workspace, compile their brag document, or track their work over time. Trigger whenever the designer mentions something they shipped, a project they worked on, something worth documenting, or asks about their accomplishments. Also trigger for phrases like "I did something today", "log this", "add to my brag doc", "compile my work", or "set up my workspace".
+description: A brag document system for senior product designers. Helps designers capture, classify, and compile their achievements into a living document for performance reviews, promotions, and career conversations. Use this skill when the designer wants to log an achievement, set up their brag doc workspace, compile their brag document, or track their work over time. Trigger whenever the designer mentions something they shipped, a project they worked on, something worth documenting, or asks about their accomplishments. Also trigger for phrases like "I did something today", "log this", "add to my brag doc", "compile my work", or "set up my workspace".
 ---
 
 # Brag Writer
@@ -37,22 +37,30 @@ When ambiguous, default to Capture + Analyze. A designer describing their work i
 
 ## Workspace structure
 
-The `.brag/` folder lives in the current working directory or the designer's home directory. All agents read from and write to this folder.
+The `brag-YYYY/` folder lives in the current working directory. All agents read from and write to this folder. A new folder is created each year — previous years are never modified.
 
 ```
-.brag/
-    company-skill-matrix.md   ← written by Context Agent, read by all
-    projects.md               ← maintained by Capture Agent
-    entries/                  ← YAML files, one per achievement
-        YYYY-MM-[slug].yaml
-    brag-doc.md               ← output, written by Compiler Agent
+brag-2025/
+    company-skill-matrix.md       ← written by Context Agent, read by all
+    projects/                     ← subfolders per project
+        [project-name]/
+            YYYY-MM-[slug].md     ← one entry per file
+    standalone-wins/
+        YYYY-MM-[slug].md
+    influence-and-collaboration/
+        YYYY-MM-[slug].md
+    learning-and-growth/
+        YYYY-MM-[slug].md
+    outside-work/
+        YYYY-MM-[slug].md
+    brag-doc.md                   ← compiled output, always regenerated
 ```
 
 ---
 
 ## Core principles
 
-These apply to every agent in the system:
+These apply to every agent in the system.
 
 **Never fabricate.** Every word in every entry comes from the designer. If information is missing, ask for it or flag it — never invent it.
 
@@ -60,9 +68,9 @@ These apply to every agent in the system:
 
 **Designer owns the writing.** Agents propose, designers approve. Nothing is saved without explicit confirmation.
 
-**Entries are the source of truth.** The YAML files in `entries/` are permanent records. The brag doc is always regenerated from them — never edited directly.
+**Entries are the source of truth.** The markdown files in the bucket folders are permanent records. The brag doc is always regenerated from them — never edited directly.
 
-**Keep it moving.** The system should feel like a fast, useful conversation — not a form to fill in. Two rounds of back-and-forth to capture an entry is ideal. Four is the maximum.
+**Keep it moving.** The system should feel like a fast, useful conversation. Two rounds of back-and-forth to capture an entry is ideal. Four is the maximum.
 
 ---
 
@@ -85,3 +93,4 @@ Full agent instructions live in the `agents/` directory. Always read the full ag
 - `agents/context-agent.md` — workspace setup, skill matrix ingestion
 - `agents/capture-agent.md` — SAR capture, classification, project linking
 - `agents/compiler-agent.md` — brag doc generation
+- `templates/entry-template.md` — entry structure reference for parsing

@@ -1,11 +1,11 @@
 ---
-name: brag-writer
-description: A brag document system for senior product designers. Helps designers capture, classify, and compile their achievements into a living document for performance reviews, promotions, and career conversations. Use this skill when the designer wants to log an achievement, set up their brag doc workspace, compile their brag document, or track their work over time. Trigger whenever the designer mentions something they shipped, a project they worked on, something worth documenting, or asks about their accomplishments. Also trigger for phrases like "I did something today", "log this", "add to my brag doc", "compile my work", or "set up my workspace".
+name: brag
+description: A brag document system for individual contributors. Helps anyone capture, classify, and compile their achievements into a living document for performance reviews, promotions, and career conversations. Use this skill when the user wants to log an achievement, set up their brag doc workspace, compile their brag document, or track their work over time. Trigger whenever the user mentions something they shipped, a project they worked on, something worth documenting, or asks about their accomplishments. Also trigger for phrases like "I did something today", "log this", "add to my brag doc", "compile my work", or "set up my workspace".
 ---
 
-# Brag Writer
+# Brag
 
-A system for senior product designers to capture achievements as they happen and compile them into a living brag document. Honest, specific, and portable across companies and roles.
+A system for individual contributors to capture achievements as they happen and compile them into a living brag document. Honest, specific, and portable across companies and roles.
 
 The system has three agents. Each has a dedicated file with full instructions. Read the relevant agent file before acting.
 
@@ -21,28 +21,23 @@ The system has three agents. Each has a dedicated file with full instructions. R
 
 ---
 
-## Commands
-
-| Command | Agent | What it does |
-|---|---|---|
-| `/setup-brag` | Context Agent | First time setup or context update |
-| `/brag` | Capture + Analyze Agent | Log a new achievement |
-
-Natural language triggers also work — see routing below.
-
----
-
 ## Routing
 
-Read the designer's message and route to the right agent. Don't ask which agent they want — infer it.
+Read the message and route to the right agent. Don't ask which agent they want — infer it.
 
-**Context Agent**: `/setup-brag`, first time setup ("set up my brag doc", "I want to start tracking my work"), new company or role ("new job", "I've changed roles", "update my company context"), or explicit reset ("start fresh").
+**Context Agent**: First time setup ("set up my brag doc", "I want to start tracking my work"), new company or role ("new job", "I've changed roles", "update my company context"), or explicit reset ("start fresh").
 
-**Capture + Analyze Agent**: `/brag`, logging work ("log an achievement", "I want to brag about something"), describing work unprompted ("I just shipped X", "I ran sessions for Y"), or anything that sounds like something the designer did recently.
+**Capture + Analyze Agent**: Logging work ("log an achievement", "I want to brag about something"), describing work unprompted ("I just shipped X", "I ran sessions for Y"), or anything that sounds like something the user did recently.
 
 **Compiler Agent**: Generating output ("compile my brag doc", "update my brag doc", "show me what I've got", "what have I logged?").
 
-When ambiguous, default to Capture + Analyze. A designer describing their work is almost always trying to log it.
+When ambiguous, default to Capture + Analyze. Someone describing their work is almost always trying to log it.
+
+**When no workspace exists**: Before routing to any agent, if no `brag-YYYY/` folder is found in the current directory, show this message and route to the Context Agent:
+
+> Brag helps you document your work as it happens, so you're never starting from scratch at review time.
+>
+> I can see there are no context files created in your folder, so I'll ask a few questions first.
 
 ---
 
@@ -73,11 +68,11 @@ brag-2025/
 
 These apply to every agent in the system.
 
-**Never fabricate.** Every word in every entry comes from the designer. If information is missing, ask for it or flag it — never invent it.
+**Never fabricate.** Every word in every entry comes from the user. If information is missing, ask for it or flag it — never invent it.
 
 **Never inflate.** Qualitative outcomes are as valid as quantitative ones. "The doc became the go-to reference" is a complete result. No fake precision, no significance inflation.
 
-**Designer owns the writing.** Agents propose, designers approve. Nothing is saved without explicit confirmation.
+**User owns the writing.** Agents propose, users approve. Nothing is saved without explicit confirmation.
 
 **Entries are the source of truth.** The markdown files in the bucket folders are permanent records. The brag doc is always regenerated from them — never edited directly.
 
@@ -87,7 +82,7 @@ These apply to every agent in the system.
 
 ## Writing standards
 
-All agents apply these when producing any text shown to the designer or saved to disk. Based on the humanizer principles from [blader/humanizer](https://github.com/blader/humanizer).
+All agents apply these when producing any text shown to the user or saved to disk. Based on the humanizer principles from [blader/humanizer](https://github.com/blader/humanizer).
 
 Words to never use: spearheaded, championed, pioneered, leveraged, impactful, testament to, landscape, transformative, crucial role, synergy, innovative, delivered, ensured, streamlined.
 
